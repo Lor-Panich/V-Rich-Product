@@ -1,24 +1,26 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="th">
 <head>
-  <meta charset="utf-8">
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>V Rich Product Extractor Bookmarklet Generator</title>
+  <title>V Rich Product Extractor</title>
   <style>
     :root {
-      color-scheme: light;
+      color-scheme: dark;
       font-family: Arial, Tahoma, sans-serif;
-      background: #f6f7f9;
-      color: #1f2933;
+      background: #0b1120;
+      color: #e5e7eb;
     }
 
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     body {
       margin: 0;
-      padding: 32px;
+      min-height: 100vh;
+      padding: 32px 18px;
+      background:
+        radial-gradient(circle at top left, rgba(20, 184, 166, 0.16), transparent 34rem),
+        linear-gradient(180deg, #0b1120 0%, #111827 100%);
     }
 
     main {
@@ -28,37 +30,45 @@
 
     h1 {
       margin: 0 0 8px;
-      font-size: 28px;
-      line-height: 1.25;
+      font-size: clamp(26px, 4vw, 38px);
+      line-height: 1.2;
+      letter-spacing: 0;
+    }
+
+    h2 {
+      margin: 0 0 12px;
+      font-size: 18px;
+      letter-spacing: 0;
     }
 
     p {
-      margin: 0 0 18px;
-      color: #52606d;
-      line-height: 1.55;
+      margin: 0 0 14px;
+      color: #cbd5e1;
+      line-height: 1.65;
     }
 
     .panel {
-      background: #ffffff;
-      border: 1px solid #d9e2ec;
+      border: 1px solid #334155;
       border-radius: 8px;
+      background: rgba(15, 23, 42, 0.92);
       padding: 18px;
       margin-top: 16px;
+      box-shadow: 0 18px 48px rgba(0, 0, 0, 0.28);
     }
 
     .mode-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
       gap: 10px;
     }
 
     button,
     .bookmarklet-link {
-      min-height: 40px;
-      border: 1px solid #bcccdc;
-      border-radius: 6px;
-      background: #ffffff;
-      color: #243b53;
+      min-height: 44px;
+      border: 1px solid #475569;
+      border-radius: 8px;
+      background: #111827;
+      color: #e5e7eb;
       cursor: pointer;
       font: inherit;
       text-align: center;
@@ -66,19 +76,20 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      padding: 8px 12px;
+      padding: 9px 13px;
     }
 
     button:hover,
     .bookmarklet-link:hover {
-      border-color: #486581;
-      background: #f0f4f8;
+      border-color: #38bdf8;
+      background: #172033;
     }
 
     button.active {
-      background: #0b5fff;
-      border-color: #0b5fff;
+      background: #0f766e;
+      border-color: #2dd4bf;
       color: #ffffff;
+      font-weight: 700;
     }
 
     .actions {
@@ -90,48 +101,65 @@
     }
 
     .bookmarklet-link {
-      background: #0e7c61;
-      border-color: #0e7c61;
+      background: #16a34a;
+      border-color: #22c55e;
       color: #ffffff;
       font-weight: 700;
     }
 
     .bookmarklet-link:hover {
-      background: #0b6b53;
-      border-color: #0b6b53;
+      background: #15803d;
+      border-color: #4ade80;
     }
 
     textarea {
       width: 100%;
-      min-height: 160px;
+      min-height: 150px;
       margin-top: 12px;
       padding: 12px;
       resize: vertical;
-      border: 1px solid #bcccdc;
-      border-radius: 6px;
+      border: 1px solid #475569;
+      border-radius: 8px;
       font: 13px/1.45 Consolas, "Courier New", monospace;
-      color: #102a43;
-      background: #f8fafc;
+      color: #dbeafe;
+      background: #020617;
+    }
+
+    ul {
+      margin: 8px 0 0;
+      padding-left: 22px;
+      color: #cbd5e1;
+      line-height: 1.7;
+    }
+
+    code {
+      color: #bae6fd;
+      background: #0f172a;
+      border: 1px solid #1e293b;
+      border-radius: 5px;
+      padding: 1px 5px;
     }
 
     .status {
       min-height: 24px;
       margin-top: 10px;
-      color: #334e68;
+      color: #a7f3d0;
       font-size: 14px;
     }
 
-    .small {
-      font-size: 13px;
+    .hint {
+      color: #94a3b8;
+      font-size: 14px;
     }
   </style>
 </head>
 <body>
   <main>
     <h1>V Rich Product Extractor</h1>
-    <p>à¹€à¸¥à¸·à¸­à¸à¹‚à¸«à¸¡à¸”à¹à¸¥à¹‰à¸§ copy bookmarklet à¸«à¸£à¸·à¸­à¸¥à¸²à¸à¸›à¸¸à¹ˆà¸¡ Bookmarklet à¹„à¸›à¹„à¸§à¹‰à¸šà¸™ Bookmarks bar à¸‚à¸­à¸‡ Chrome</p>
+    <p>เครื่องมือ Bookmarklet แบบ local สำหรับดึงรหัสสินค้า สถานะ และรูปจากหน้า V Rich App โดยไม่แก้เว็บต้นทางและไม่ยิง API เอง</p>
 
     <section class="panel">
+      <h2>เลือกโหมด</h2>
       <div class="mode-grid" id="mode-buttons"></div>
       <div class="actions">
         <a class="bookmarklet-link" id="bookmarklet-link" href="#">V Rich Extractor</a>
@@ -139,7 +167,26 @@
       </div>
       <div class="status" id="status"></div>
       <textarea id="bookmarklet-output" spellcheck="false" readonly></textarea>
-      <p class="small">à¸–à¹‰à¸² Chrome à¹„à¸¡à¹ˆà¹ƒà¸«à¹‰ copy à¸ˆà¸²à¸à¹„à¸Ÿà¸¥à¹Œ local à¹ƒà¸«à¹‰à¹€à¸¥à¸·à¸­à¸à¸‚à¹‰à¸­à¸„à¸§à¸²à¸¡à¹ƒà¸™à¸à¸¥à¹ˆà¸­à¸‡à¸™à¸µà¹‰à¹à¸¥à¹‰à¸§ copy à¹€à¸­à¸‡à¹„à¸”à¹‰</p>
+      <p class="hint">ลากปุ่มสีเขียวไปไว้บน Bookmarks bar หรือกด Copy Bookmarklet แล้วสร้าง bookmark ใหม่ด้วยตัวเอง</p>
+    </section>
+
+    <section class="panel">
+      <h2>วิธีใช้เร็ว</h2>
+      <ul>
+        <li>เปิด Chrome แล้วกด <code>Ctrl+Shift+B</code> เพื่อแสดง Bookmarks bar</li>
+        <li>เลือกโหมดที่ต้องการ แล้วลากปุ่ม <code>V Rich ...</code> ไปวางบน Bookmarks bar</li>
+        <li>เปิดหน้า V Rich ที่มี <code>#product-list</code> แล้วกด bookmarklet ที่บันทึกไว้</li>
+        <li>ถ้าต้องการทดสอบแค่ 3 รายการ ให้เปิด Console แล้วรัน <code>window.vrichExtractorLimit = 3</code> ก่อนกด bookmarklet</li>
+      </ul>
+    </section>
+
+    <section class="panel">
+      <h2>สีใน Google Sheets</h2>
+      <p>หลังวางข้อมูลใน Google Sheets แนะนำให้ใช้ Conditional formatting ที่คอลัมน์สถานะ:</p>
+      <ul>
+        <li>ถ้าสถานะ = <code>ขายแล้ว</code> ให้ใส่สีเขียว</li>
+        <li>ถ้าสถานะ = <code>ขายหมด</code> ให้ใส่สีแดง</li>
+      </ul>
     </section>
   </main>
 
@@ -147,15 +194,14 @@
     "use strict";
 
     var MODES = [
-      { id: "SIMPLE_GREEN", label: "Simple Green", type: "simple" },
-      { id: "SIMPLE_RED", label: "Simple Red", type: "simple" },
-      { id: "SIMPLE_BOTH", label: "Simple Both", type: "simple" },
-      { id: "FULL_GREEN", label: "Full Green", type: "full" },
-      { id: "FULL_RED", label: "Full Red", type: "full" },
-      { id: "FULL_BOTH", label: "Full Both", type: "full" }
+      { id: "RED_SIMPLE", label: "ดึงแดงเท่านั้น", type: "simple" },
+      { id: "GREEN_SIMPLE", label: "ดึงเขียวเท่านั้น", type: "simple" },
+      { id: "RED_IMAGE", label: "ดึงแดงเท่านั้น + รูป", type: "image" },
+      { id: "GREEN_IMAGE", label: "ดึงเขียวเท่านั้น + รูป", type: "image" },
+      { id: "BOTH_SIMPLE", label: "ดึงเขียว+แดง", type: "simple" }
     ];
 
-    var selectedMode = "SIMPLE_BOTH";
+    var selectedMode = "RED_SIMPLE";
     var buttonsEl = document.getElementById("mode-buttons");
     var linkEl = document.getElementById("bookmarklet-link");
     var outputEl = document.getElementById("bookmarklet-output");
@@ -166,137 +212,98 @@
       function runner() {
         "use strict";
         var MODE = "__MODE__";
-        var MODES = { SIMPLE_GREEN: ["bg-success"], SIMPLE_RED: ["bg-danger"], SIMPLE_BOTH: ["bg-success", "bg-danger"] };
-        var STATUS_LABELS = { "bg-success": "à¸‚à¸²à¸¢à¹à¸¥à¹‰à¸§", "bg-danger": "à¸‚à¸²à¸¢à¸«à¸¡à¸”", "bg-blue": "à¸¢à¸±à¸‡à¹„à¸¡à¹ˆà¹„à¸”à¹‰à¸‚à¸²à¸¢" };
-        function getStatusClass(el) { if (el.classList.contains("bg-success")) return "bg-success"; if (el.classList.contains("bg-danger")) return "bg-danger"; if (el.classList.contains("bg-blue")) return "bg-blue"; return ""; }
+        var DEBUG_LIMIT = 0;
+        var MODES = { RED_SIMPLE: ["bg-danger"], GREEN_SIMPLE: ["bg-success"], BOTH_SIMPLE: ["bg-success", "bg-danger"] };
+        var STATUS_LABELS = { "bg-success": "ขายแล้ว", "bg-danger": "ขายหมด" };
+        var HEADER = "รหัสสินค้า\tสถานะ";
+        function getStatusClass(el) { if (el.classList.contains("bg-success")) return "bg-success"; if (el.classList.contains("bg-danger")) return "bg-danger"; return ""; }
         function getProductCode(el) { return (el.textContent || "").replace(/\s+/g, " ").trim(); }
-        function pipeCell(value) { return String(value == null ? "" : value).replace(/\r?\n/g, " ").replace(/\s+\|\s+/g, " / ").trim(); }
-        function copyText(text) {
-          if (navigator.clipboard && navigator.clipboard.writeText) return navigator.clipboard.writeText(text);
-          return new Promise(function (resolve, reject) {
-            var textarea = document.createElement("textarea");
-            textarea.value = text;
-            textarea.setAttribute("readonly", "");
-            textarea.style.position = "fixed";
-            textarea.style.top = "-9999px";
-            document.body.appendChild(textarea);
-            textarea.select();
-            try {
-              var ok = document.execCommand("copy");
-              document.body.removeChild(textarea);
-              ok ? resolve() : reject(new Error("document.execCommand copy failed"));
-            } catch (error) {
-              document.body.removeChild(textarea);
-              reject(error);
-            }
-          });
-        }
-        var allowedClasses = MODES[MODE] || MODES.SIMPLE_BOTH;
+        function tsvCell(value) { return String(value == null ? "" : value).replace(/\t/g, " ").replace(/\r?\n/g, " ").trim(); }
+        function showResultTextarea(text) { var existing = document.getElementById("vrich-extractor-fallback"); if (existing) existing.parentNode.removeChild(existing); var box = document.createElement("div"); box.id = "vrich-extractor-fallback"; box.style.cssText = "position:fixed;z-index:2147483647;left:16px;right:16px;bottom:16px;background:#111827;color:#f9fafb;border:1px solid #374151;border-radius:8px;padding:12px;box-shadow:0 20px 60px rgba(0,0,0,.45);font:14px Arial,Tahoma,sans-serif;"; var label = document.createElement("div"); label.textContent = "คัดลอกอัตโนมัติไม่สำเร็จ กด Ctrl+C เพื่อคัดลอกข้อมูลจากกล่องนี้"; label.style.marginBottom = "8px"; var textarea = document.createElement("textarea"); textarea.value = text; textarea.style.cssText = "width:100%;height:220px;background:#020617;color:#e5e7eb;border:1px solid #4b5563;border-radius:6px;padding:10px;font:13px Consolas,monospace;"; box.appendChild(label); box.appendChild(textarea); document.body.appendChild(box); textarea.focus(); textarea.select(); }
+        function copyText(text) { if (navigator.clipboard && navigator.clipboard.writeText) return navigator.clipboard.writeText(text); return new Promise(function (resolve, reject) { var textarea = document.createElement("textarea"); textarea.value = text; textarea.setAttribute("readonly", ""); textarea.style.position = "fixed"; textarea.style.top = "-9999px"; document.body.appendChild(textarea); textarea.select(); try { var ok = document.execCommand("copy"); document.body.removeChild(textarea); ok ? resolve() : reject(new Error("document.execCommand copy failed")); } catch (error) { document.body.removeChild(textarea); reject(error); } }); }
         var list = document.querySelector("#product-list");
-        if (!list) { alert("V Rich Product Extractor: à¹„à¸¡à¹ˆà¸žà¸š #product-list"); return; }
-        var links = Array.prototype.slice.call(list.querySelectorAll("a")).filter(function (link) { return allowedClasses.indexOf(getStatusClass(link)) !== -1; });
-        if (links.length === 0) { alert("V Rich Product Extractor: à¹€à¸ˆà¸­ 0 à¸£à¸²à¸¢à¸à¸²à¸£à¹ƒà¸™à¹‚à¸«à¸¡à¸”à¸™à¸µà¹‰"); return; }
-        var rows = links.map(function (link, index) {
-          var statusClass = getStatusClass(link);
-          var row = { code: getProductCode(link), status: STATUS_LABELS[statusClass] || statusClass };
-          console.log("[" + (index + 1) + "/" + links.length + "] " + row.code + " | " + row.status);
-          return row;
-        });
+        if (!list) { alert("V Rich Product Extractor: ไม่พบ #product-list"); return; }
+        var allowedClasses = MODES[MODE] || MODES.BOTH_SIMPLE;
+        var items = Array.prototype.slice.call(list.querySelectorAll("a")).filter(function (el) { return allowedClasses.indexOf(getStatusClass(el)) !== -1; });
+        if (items.length === 0) { alert("V Rich Product Extractor: เจอ 0 รายการในโหมดนี้"); return; }
+        var requestedLimit = Number(window.vrichExtractorLimit || DEBUG_LIMIT || 0);
+        if (Number.isFinite(requestedLimit) && requestedLimit > 0) { items = items.slice(0, requestedLimit); console.warn("V Rich Product Extractor limit", requestedLimit); }
+        var rows = items.map(function (el, index) { var statusClass = getStatusClass(el); var row = { code: getProductCode(el), status: STATUS_LABELS[statusClass] || statusClass }; console.log("[" + (index + 1) + "/" + items.length + "] " + row.code + " " + row.status); return row; });
         window.vrichExtractorResult = rows;
-        window.vrichExtractorText = ["à¸£à¸«à¸±à¸ªà¸ªà¸´à¸™à¸„à¹‰à¸² | à¸ªà¸–à¸²à¸™à¸°"].concat(rows.map(function (row) { return [pipeCell(row.code), pipeCell(row.status)].join(" | "); })).join("\n");
-        copyText(window.vrichExtractorText).then(function () { alert("V Rich Product Extractor: à¸„à¸±à¸”à¸¥à¸­à¸à¸œà¸¥à¸¥à¸±à¸žà¸˜à¹Œà¹à¸¥à¹‰à¸§ " + rows.length + " à¸£à¸²à¸¢à¸à¸²à¸£"); }).catch(function () { alert("V Rich Product Extractor: copy à¹„à¸¡à¹ˆà¸ªà¸³à¹€à¸£à¹‡à¸ˆ à¹ƒà¸«à¹‰à¹€à¸›à¸´à¸” Console à¹à¸¥à¹‰à¸§à¸£à¸±à¸™ copy(window.vrichExtractorText)"); });
+        window.vrichExtractorText = [HEADER].concat(rows.map(function (row) { return [tsvCell(row.code), tsvCell(row.status)].join("\t"); })).join("\n");
+        copyText(window.vrichExtractorText).then(function () { alert("V Rich Product Extractor: คัดลอกแล้ว " + rows.length + " รายการ"); }).catch(function () { showResultTextarea(window.vrichExtractorText); alert("V Rich Product Extractor: copy ไม่สำเร็จ ให้กด Ctrl+C จากกล่องข้อมูลที่แสดงอยู่"); });
       }
       return "(" + runner.toString().replace('"__MODE__"', JSON.stringify(mode)) + ")();";
     }
 
-    function fullSource(mode) {
+    function imageSource(mode) {
       async function runner() {
         "use strict";
         var MODE = "__MODE__";
         var DEBUG_LIMIT = 0;
-        var MODES = { FULL_GREEN: ["bg-success"], FULL_RED: ["bg-danger"], FULL_BOTH: ["bg-success", "bg-danger"] };
-        var STATUS_LABELS = { "bg-success": "\u0e02\u0e32\u0e22\u0e41\u0e25\u0e49\u0e27", "bg-danger": "\u0e02\u0e32\u0e22\u0e2b\u0e21\u0e14" };
-        var HEADER = "\u0e23\u0e2b\u0e31\u0e2a\u0e2a\u0e34\u0e19\u0e04\u0e49\u0e32\t\u0e2a\u0e16\u0e32\u0e19\u0e30\t\u0e23\u0e39\u0e1b\t\u0e2b\u0e21\u0e32\u0e22\u0e40\u0e2b\u0e15\u0e38";
-        var AFTER_CLICK_WAIT_MS = 700;
-        var RETRY_WAIT_MS = 1500;
-        var WAIT_TIMEOUT_MS = 5000;
+        var MODES = { RED_IMAGE: ["bg-danger"], GREEN_IMAGE: ["bg-success"] };
+        var STATUS_LABELS = { "bg-success": "ขายแล้ว", "bg-danger": "ขายหมด" };
+        var HEADER = "รหัสสินค้า\tสถานะ\tรูป";
         function wait(ms) { return new Promise(function (resolve) { window.setTimeout(resolve, ms); }); }
-        async function waitUntil(fn, timeoutMs) { var started = Date.now(); while (Date.now() - started < timeoutMs) { var result = fn(); if (result) return result; await wait(150); } return null; }
         function getStatusClass(el) { if (el.classList.contains("bg-success")) return "bg-success"; if (el.classList.contains("bg-danger")) return "bg-danger"; return ""; }
         function getProductCode(el) { return (el.textContent || "").replace(/\s+/g, " ").trim(); }
         function tsvCell(value) { return String(value == null ? "" : value).replace(/\t/g, " ").replace(/\r?\n/g, " ").trim(); }
         function escapeSheetString(value) { return String(value || "").replace(/"/g, '""'); }
-        function normalizeText(value) { return String(value || "").replace(/\s+/g, " ").trim(); }
         function isProductImageUrl(src) { if (!src) return false; var lower = String(src).toLowerCase(); return lower.indexOf("/product/img/") !== -1 && lower.indexOf("/sale") === -1 && lower.indexOf("/logo") === -1 && lower.indexOf("emojione") === -1 && lower.indexOf("data:image") !== 0 && lower.indexOf("blob:") !== 0; }
         function toAbsoluteProductUrl(rawUrl) { if (!rawUrl) return ""; try { var url = new URL(rawUrl, window.location.origin).href; return isProductImageUrl(url) ? url : ""; } catch (error) { return ""; } }
-        function getCurrentProductImageUrlRaw() { var img = document.querySelector("img#imgProduct"); return img ? (img.currentSrc || img.src || "") : ""; }
-        function getProductImageData() { var rawUrl = getCurrentProductImageUrlRaw(); return { rawUrl: rawUrl, finalUrl: toAbsoluteProductUrl(rawUrl) }; }
-        function getDetailRoots() { return ["#drop", "#normal"].map(function (selector) { return document.querySelector(selector); }).filter(Boolean); }
-        function getDetailTitleMatched(code) { var titleSelectors = "h1,h2,h3,h4,h5,.title,.box-title,.panel-title,.product-title,[id*=title],[class*=title]"; return getDetailRoots().some(function (root) { return Array.prototype.some.call(root.querySelectorAll(titleSelectors), function (el) { return normalizeText(el.textContent).indexOf(code) !== -1; }); }); }
-        function getDetailLis() { var selectors = ['#drop-c1-ul li[id^="detail-"]', '#drop-c1 li[id^="detail-"]', '#drop li[id^="detail-"]', "#drop-c1-ul li", "#drop-c1 li", "#drop li"]; var seen = []; var lis = []; selectors.forEach(function (selector) { Array.prototype.forEach.call(document.querySelectorAll(selector), function (li) { if (seen.indexOf(li) === -1) { seen.push(li); lis.push(li); } }); }); return lis; }
-        function getDetailItems(code) { var detailLis = getDetailLis(); var seen = []; var items = []; detailLis.forEach(function (li) { var text = normalizeText(li.textContent); if (text.indexOf(code) !== -1 && seen.indexOf(text) === -1) { seen.push(text); items.push(text); } }); return { allCount: detailLis.length, items: items }; }
-        function getDetailState(code, oldImageRawUrl, oldImageFinalUrl) { var detailItems = getDetailItems(code); var imageData = getProductImageData(); var titleMatched = getDetailTitleMatched(code); var imageChanged = !!imageData.finalUrl && imageData.rawUrl !== oldImageRawUrl && imageData.finalUrl !== oldImageFinalUrl; var detailChanged = titleMatched || detailItems.items.length > 0 || imageChanged; return { titleMatched: titleMatched, detailLiCount: detailItems.allCount, matchedRemarkCount: detailItems.items.length, remarkItems: detailItems.items, imageRawUrl: imageData.rawUrl, imageFinalUrl: imageData.finalUrl, imageChanged: imageChanged, detailChanged: detailChanged }; }
-        function logDetailState(state) { console.log("detail title matched", state.titleMatched); console.log("detail li count", state.detailLiCount); console.log("matched remark li count", state.matchedRemarkCount); console.log("new image URL", state.imageFinalUrl || "(empty)"); console.log("image changed", state.imageChanged); console.log("detail changed", state.detailChanged); }
-        async function waitForDetailPanelChanged(code, oldImageRawUrl, oldImageFinalUrl, timeoutMs) { var state = await waitUntil(function () { var current = getDetailState(code, oldImageRawUrl, oldImageFinalUrl); return current.detailChanged ? current : null; }, timeoutMs); if (!state) state = getDetailState(code, oldImageRawUrl, oldImageFinalUrl); logDetailState(state); if (!state.detailChanged) console.warn("detail not changed for " + code); return state; }
-        async function clickAndWaitForDetail(el, code, oldImageRawUrl, oldImageFinalUrl, attempt) { console.log("click product " + code + " attempt " + attempt); el.click(); await wait(AFTER_CLICK_WAIT_MS); return waitForDetailPanelChanged(code, oldImageRawUrl, oldImageFinalUrl, WAIT_TIMEOUT_MS); }
-        async function getReadyDetailState(el, code, oldImageRawUrl, oldImageFinalUrl) { var state = await clickAndWaitForDetail(el, code, oldImageRawUrl, oldImageFinalUrl, 1); if (state.detailChanged) return state; console.warn("retry click product " + code); el.click(); await wait(RETRY_WAIT_MS); state = await waitForDetailPanelChanged(code, oldImageRawUrl, oldImageFinalUrl, WAIT_TIMEOUT_MS); return state; }
-        function getRemarkFromDetailState(state) { if (state.remarkItems.length) return state.remarkItems.join(" | "); console.log("remark empty because no matched detail li"); return ""; }
-        function getSafeImageFormula(state, oldImageRawUrl, oldImageFinalUrl) { if (!state.imageFinalUrl) return ""; if ((state.imageRawUrl === oldImageRawUrl || state.imageFinalUrl === oldImageFinalUrl) && !state.titleMatched && state.matchedRemarkCount === 0) { console.warn("image skipped because stale"); return ""; } return '=IMAGE("' + escapeSheetString(state.imageFinalUrl) + '")'; }
+        function getProductImageUrl() { var img = document.querySelector("img#imgProduct"); var rawUrl = img ? (img.currentSrc || img.src || "") : ""; var imageUrl = toAbsoluteProductUrl(rawUrl); console.log("img#imgProduct raw", rawUrl || "(empty)"); console.log("image final URL", imageUrl || "(empty)"); return imageUrl; }
+        function findProductBadge(list, code, statusClass) { var selector = "a." + statusClass; var matches = Array.prototype.slice.call(list.querySelectorAll(selector)); return matches.find(function (el) { return getProductCode(el) === code; }) || null; }
+        async function clickProductBadge(el, code) { console.log("click product " + code); try { el.scrollIntoView({ block: "center", inline: "center" }); } catch (error) { el.scrollIntoView(); } await wait(500); el.click(); await wait(2000); }
+        function showResultTextarea(text) { var existing = document.getElementById("vrich-extractor-fallback"); if (existing) existing.parentNode.removeChild(existing); var box = document.createElement("div"); box.id = "vrich-extractor-fallback"; box.style.cssText = "position:fixed;z-index:2147483647;left:16px;right:16px;bottom:16px;background:#111827;color:#f9fafb;border:1px solid #374151;border-radius:8px;padding:12px;box-shadow:0 20px 60px rgba(0,0,0,.45);font:14px Arial,Tahoma,sans-serif;"; var label = document.createElement("div"); label.textContent = "คัดลอกอัตโนมัติไม่สำเร็จ กด Ctrl+C เพื่อคัดลอกข้อมูลจากกล่องนี้"; label.style.marginBottom = "8px"; var textarea = document.createElement("textarea"); textarea.value = text; textarea.style.cssText = "width:100%;height:260px;background:#020617;color:#e5e7eb;border:1px solid #4b5563;border-radius:6px;padding:10px;font:13px Consolas,monospace;"; box.appendChild(label); box.appendChild(textarea); document.body.appendChild(box); textarea.focus(); textarea.select(); }
         function copyText(text) { if (navigator.clipboard && navigator.clipboard.writeText) return navigator.clipboard.writeText(text); return new Promise(function (resolve, reject) { var textarea = document.createElement("textarea"); textarea.value = text; textarea.setAttribute("readonly", ""); textarea.style.position = "fixed"; textarea.style.top = "-9999px"; document.body.appendChild(textarea); textarea.select(); try { var ok = document.execCommand("copy"); document.body.removeChild(textarea); ok ? resolve() : reject(new Error("document.execCommand copy failed")); } catch (error) { document.body.removeChild(textarea); reject(error); } }); }
         var list = document.querySelector("#product-list");
-        if (!list) { alert("V Rich Product Extractor: #product-list not found"); return; }
-        var allowedClasses = MODES[MODE] || MODES.FULL_BOTH;
-        var items = Array.prototype.slice.call(list.querySelectorAll("a.badge")).filter(function (el) { return allowedClasses.indexOf(getStatusClass(el)) !== -1; });
-        if (items.length === 0) { alert("V Rich Product Extractor: 0 items in this mode"); return; }
+        if (!list) { alert("V Rich Product Extractor: ไม่พบ #product-list"); return; }
+        var allowedClasses = MODES[MODE] || MODES.RED_IMAGE;
+        var items = Array.prototype.slice.call(list.querySelectorAll("a")).filter(function (el) { return allowedClasses.indexOf(getStatusClass(el)) !== -1; }).map(function (el) { var statusClass = getStatusClass(el); return { code: getProductCode(el), statusClass: statusClass, status: STATUS_LABELS[statusClass] || statusClass }; });
+        if (items.length === 0) { alert("V Rich Product Extractor: เจอ 0 รายการในโหมดนี้"); return; }
         var requestedLimit = Number(window.vrichExtractorLimit || DEBUG_LIMIT || 0);
         if (Number.isFinite(requestedLimit) && requestedLimit > 0) { items = items.slice(0, requestedLimit); console.warn("V Rich Product Extractor limit", requestedLimit); }
         var rows = [];
         for (var index = 0; index < items.length; index += 1) {
-          var el = items[index];
-          var code = getProductCode(el);
-          var statusClass = getStatusClass(el);
-          var status = STATUS_LABELS[statusClass] || statusClass;
-          var oldImageRawUrl = getCurrentProductImageUrlRaw();
-          var oldImageFinalUrl = toAbsoluteProductUrl(oldImageRawUrl);
-          console.log("[" + (index + 1) + "/" + items.length + "] click product " + code);
-          console.log("old image URL", oldImageFinalUrl || oldImageRawUrl || "(empty)");
-          var state = await getReadyDetailState(el, code, oldImageRawUrl, oldImageFinalUrl);
-          var imageFormula = state.detailChanged ? getSafeImageFormula(state, oldImageRawUrl, oldImageFinalUrl) : "";
-          var remark = state.detailChanged ? getRemarkFromDetailState(state) : "";
-          if (!state.detailChanged) { imageFormula = ""; remark = ""; }
-          console.log("remark preview", remark ? remark.slice(0, 80) : "(empty)");
-          rows.push({ code: code, status: status, image: imageFormula, remark: remark });
-          console.log("row pushed", code);
+          var item = items[index];
+          console.log("[" + (index + 1) + "/" + items.length + "] " + item.code + " " + item.status);
+          list = document.querySelector("#product-list");
+          if (!list) { console.warn("#product-list หายไประหว่างทำงาน", item.code); rows.push({ code: item.code, status: item.status, image: "" }); continue; }
+          var badge = findProductBadge(list, item.code, item.statusClass);
+          if (!badge) { console.warn("ไม่พบ badge ปัจจุบันของสินค้า", item.code); rows.push({ code: item.code, status: item.status, image: "" }); continue; }
+          await clickProductBadge(badge, item.code);
+          var imageUrl = getProductImageUrl();
+          var imageFormula = imageUrl ? '=IMAGE("' + escapeSheetString(imageUrl) + '")' : "";
+          rows.push({ code: item.code, status: item.status, image: imageFormula });
         }
         window.vrichExtractorResult = rows;
-        window.vrichExtractorText = [HEADER].concat(rows.map(function (row) { return [tsvCell(row.code), tsvCell(row.status), tsvCell(row.image), tsvCell(row.remark)].join("\t"); })).join("\n");
-        copyText(window.vrichExtractorText).then(function () { alert("V Rich Product Extractor: copied " + rows.length + " rows"); }).catch(function () { alert("V Rich Product Extractor: copy failed. Open Console and run copy(window.vrichExtractorText)"); });
+        window.vrichExtractorText = [HEADER].concat(rows.map(function (row) { return [tsvCell(row.code), tsvCell(row.status), tsvCell(row.image)].join("\t"); })).join("\n");
+        copyText(window.vrichExtractorText).then(function () { alert("V Rich Product Extractor: คัดลอกแล้ว " + rows.length + " รายการ"); }).catch(function () { showResultTextarea(window.vrichExtractorText); alert("V Rich Product Extractor: copy ไม่สำเร็จ ให้กด Ctrl+C จากกล่องข้อมูลที่แสดงอยู่"); });
       }
       return "(" + runner.toString().replace('"__MODE__"', JSON.stringify(mode)) + ")();";
     }
+
     function makeBookmarklet(mode) {
-      var config = MODES.filter(function (item) { return item.id === mode; })[0] || MODES[2];
-      var source = config.type === "full" ? fullSource(config.id) : simpleSource(config.id);
+      var config = MODES.filter(function (item) { return item.id === mode; })[0] || MODES[0];
+      var source = config.type === "image" ? imageSource(config.id) : simpleSource(config.id);
       return "javascript:" + encodeURIComponent(source);
     }
 
     function setMode(mode) {
       selectedMode = mode;
+      var config = MODES.filter(function (item) { return item.id === mode; })[0] || MODES[0];
       var bookmarklet = makeBookmarklet(mode);
-      var label = MODES.filter(function (item) { return item.id === mode; })[0].label;
       linkEl.href = bookmarklet;
-      linkEl.textContent = "V Rich " + label;
+      linkEl.textContent = "V Rich " + config.label;
       outputEl.value = bookmarklet;
-      statusEl.textContent = "Selected: " + label;
+      statusEl.textContent = "เลือกโหมด: " + config.label;
       Array.prototype.forEach.call(buttonsEl.querySelectorAll("button"), function (button) {
         button.classList.toggle("active", button.dataset.mode === mode);
       });
     }
 
     function copyText(text) {
-      if (navigator.clipboard && navigator.clipboard.writeText) {
-        return navigator.clipboard.writeText(text);
-      }
+      if (navigator.clipboard && navigator.clipboard.writeText) return navigator.clipboard.writeText(text);
       outputEl.focus();
       outputEl.select();
       return document.execCommand("copy") ? Promise.resolve() : Promise.reject(new Error("copy failed"));
@@ -307,17 +314,17 @@
       button.type = "button";
       button.dataset.mode = mode.id;
       button.textContent = mode.label;
-      button.addEventListener("click", function () {
-        setMode(mode.id);
-      });
+      button.addEventListener("click", function () { setMode(mode.id); });
       buttonsEl.appendChild(button);
     });
 
     copyButtonEl.addEventListener("click", function () {
       copyText(outputEl.value).then(function () {
-        statusEl.textContent = "Copied bookmarklet: " + selectedMode;
+        statusEl.textContent = "คัดลอก Bookmarklet แล้ว: " + selectedMode;
       }).catch(function () {
-        statusEl.textContent = "Copy à¹„à¸¡à¹ˆà¸ªà¸³à¹€à¸£à¹‡à¸ˆ à¹ƒà¸«à¹‰à¹€à¸¥à¸·à¸­à¸à¸‚à¹‰à¸­à¸„à¸§à¸²à¸¡à¹ƒà¸™à¸à¸¥à¹ˆà¸­à¸‡à¹à¸¥à¹‰à¸§ copy à¹€à¸­à¸‡";
+        outputEl.focus();
+        outputEl.select();
+        statusEl.textContent = "คัดลอกไม่สำเร็จ ให้เลือกข้อความในกล่องแล้วกด Ctrl+C";
       });
     });
 
@@ -325,6 +332,3 @@
   </script>
 </body>
 </html>
-
-
-
